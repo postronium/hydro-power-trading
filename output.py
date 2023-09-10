@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
-from optimize_dynamic import DynamicProgrammingOptimisation
-from optimize_dynamic_fast import DynamicProgrammingOptimisationFast
 from powerplant import IPumpStoragePlant, PumpStoragePlantTest
 
 
@@ -59,29 +57,6 @@ def plot_day_electricity_price(day_index: int, price_1, price_2, price_3):
     plt.xlabel('Quarter hour')
     plt.title("Electricity prices for day %s" % (str(day_index)))
     plt.show(block=False)
-
-
-def test_debug_optimisation(electricity_price):
-    ppt: IPumpStoragePlant = PumpStoragePlantTest()
-    optimiser_dynprog_fast = DynamicProgrammingOptimisationFast(ppt)
-    optimiser_dynprog_slow = DynamicProgrammingOptimisation(ppt)
-
-    mw_to_mwh_factors = np.ones_like(electricity_price)
-
-    da_prices_fast = optimiser_dynprog_fast.calculate_optimal_schedule(electricity_price, ppt.max_level / 2, 0,
-                                                                       ppt.max_level / 2, mw_to_mwh_factors)
-    da_prices_slow = optimiser_dynprog_slow.calculate_optimal_schedule(electricity_price, ppt.max_level / 2, 0,
-                                                                       ppt.max_level / 2, mw_to_mwh_factors)
-
-    print("Slow result level")
-    print(da_prices_slow['hourly_energy_level'])
-
-    plt.plot(da_prices_slow['hourly_energy_level'])
-    plt.plot(da_prices_fast['hourly_energy_level'])
-    plt.legend(['slow', 'fast'])
-    plt.xlabel('time step')
-    plt.ylabel('energy level')
-    plt.show()
 
 def plot_market(market):
     da_daily_cashflow_sum = np.cumsum([np.sum(market.transaction_history_da[d]) for d in market.transaction_history_da])

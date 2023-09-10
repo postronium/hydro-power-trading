@@ -1,6 +1,6 @@
 from input import read_power_plant_informations
 from market import Market, PumpStoragePlantIRMarketOptimiserNDays
-from optimize_dynamic_fast_fast import DynamicProgrammingOptimisationFastFast
+from optimize_dynamic import DynamicProgrammingOptimisation
 from output import plot_powerplant, plot_market, plot_real_and_intrinsic_value, plot_real_and_intrinsic_value_cumsum, print_stats, plot_total_value_vs_intrinsic_value
 from powerplant import IPumpStoragePlant
 import time
@@ -9,7 +9,7 @@ import numpy as np
 def default_case(price_1, price_2, price_3):
     ppt_fast: IPumpStoragePlant = read_power_plant_informations()
     market_fast: Market = Market()
-    market_optimiser_fast = PumpStoragePlantIRMarketOptimiserNDays(ppt_fast, market_fast, DynamicProgrammingOptimisationFastFast(ppt_fast))
+    market_optimiser_fast = PumpStoragePlantIRMarketOptimiserNDays(ppt_fast, market_fast, DynamicProgrammingOptimisation(ppt_fast))
 
     market_optimiser_fast.set_prices(price_1, price_2, price_3)
     start = time.time()
@@ -33,7 +33,7 @@ def cashflow_by_timehorizont(min_timehorizont, max_timehorizont, price_1, price_
         print("##################### %s days #####################" % str(timehorizont))
         ppt_fast: IPumpStoragePlant = read_power_plant_informations()
         market_fast: Market = Market()
-        market_optimiser_fast = PumpStoragePlantIRMarketOptimiserNDays(ppt_fast, market_fast, DynamicProgrammingOptimisationFastFast(ppt_fast))
+        market_optimiser_fast = PumpStoragePlantIRMarketOptimiserNDays(ppt_fast, market_fast, DynamicProgrammingOptimisation(ppt_fast))
         market_optimiser_fast.timehorizon = timehorizont
 
         market_optimiser_fast.set_prices(price_1, price_2, price_3)
@@ -59,7 +59,7 @@ def cashflow_by_end_level(end_levels, price_1, price_2, price_3, timehorizon = 7
         print("##################### %s MWh #####################" % str(lvl))
         ppt_fast: IPumpStoragePlant = read_power_plant_informations()
         market_fast: Market = Market()
-        market_optimiser_fast = PumpStoragePlantIRMarketOptimiserNDays(ppt_fast, market_fast, DynamicProgrammingOptimisationFastFast(ppt_fast))
+        market_optimiser_fast = PumpStoragePlantIRMarketOptimiserNDays(ppt_fast, market_fast, DynamicProgrammingOptimisation(ppt_fast))
         market_optimiser_fast.end_level = lvl
         market_optimiser_fast.timehorizon = timehorizon
 
@@ -90,7 +90,7 @@ def cashflow_by_capacity(timehorizont, capacities, price_1, price_2, price_3):
         ppt_fast: IPumpStoragePlant = read_power_plant_informations()
         ppt_fast.max_level = capacity
         market_fast: Market = Market()
-        market_optimiser_fast = PumpStoragePlantIRMarketOptimiserNDays(ppt_fast, market_fast, DynamicProgrammingOptimisationFastFast(ppt_fast))
+        market_optimiser_fast = PumpStoragePlantIRMarketOptimiserNDays(ppt_fast, market_fast, DynamicProgrammingOptimisation(ppt_fast))
         market_optimiser_fast.timehorizon = timehorizont
 
         market_optimiser_fast.set_prices(price_1, price_2, price_3)
