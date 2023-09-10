@@ -7,7 +7,7 @@ from powerplant import IPumpStoragePlant
 
 class MILPScheduleOptimization(IScheduleOptimization):
     """
-    Deprecated, use the DynamicProgrammingScheduleOptimization instead.
+    This don't work anymore, use optimize_dynamic instead. TODO need to be fixed
     Optimisation of the schedule of the pump storage plant using a Mixed Integer Linear Programming.
     """
 
