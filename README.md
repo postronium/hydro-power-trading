@@ -13,7 +13,10 @@ The second objective was to conduct experiments to observe how parameter changes
 * Profit at different storage capacities
 * Profit at different final states and time horizons (for Day-Ahead prices)
 
-All experiments are in the ```experiments.py``` file, you can add some experiments if you want
+All experiments are in the ```experiments.py``` file, you can add some experiments if you want.
+
+Here is an example of an optimisation without experiments.
+![Schedule and fill level of a hydro dam](result-default-case.png)
 
 ## Optimization Methods
 
