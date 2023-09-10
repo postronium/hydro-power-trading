@@ -22,15 +22,15 @@ def read_power_plant_informations():
     dfs = {sheet_name: storage_data.parse(sheet_name)
            for sheet_name in storage_data.sheet_names}
     # Storage
-    storage_level_max = dfs["Tabelle1"].values[7, 2]
+    storage_level_max = dfs["ps1"].values[7, 2]
     storage_level_anfang = 0.5 * storage_level_max
 
     # Turbine and Pump
-    storage_turb_max_el = dfs["Tabelle1"].values[1, 2]
-    storage_turb_min_el = dfs["Tabelle1"].values[2, 2]
-    storage_pump_max_el = dfs["Tabelle1"].values[3, 2]
-    storage_pump_min_el = dfs["Tabelle1"].values[4, 2]
-    storage_pump_eta = dfs["Tabelle1"].values[6, 2]
+    storage_turb_max_el = dfs["ps1"].values[1, 2]
+    storage_turb_min_el = dfs["ps1"].values[2, 2]
+    storage_pump_max_el = dfs["ps1"].values[3, 2]
+    storage_pump_min_el = dfs["ps1"].values[4, 2]
+    storage_pump_eta = dfs["ps1"].values[6, 2]
 
     pump_efficiency = 0.75
 
